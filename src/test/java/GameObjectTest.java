@@ -16,9 +16,12 @@ public class GameObjectTest extends TestCase {
     @Test
     public void testGlobal0() {
         GameObject obj = new GameObject(GameObject.ROOT);
-        
+
+        System.out.println("Getting Global Position");
         double[] p = obj.getGlobalPosition();
+        System.out.println("Getting Global Rotation");
         double r = obj.getGlobalRotation();
+        System.out.println("Getting Global Scale");
         double s = obj.getGlobalScale();
         
         assertEquals(0, p[0], EPSILON);
@@ -55,11 +58,25 @@ public class GameObjectTest extends TestCase {
         parent.scale(2);
         
         // the child is also moved:
-        
+
+        System.out.println("Getting Global Position1");
         double[] p = child.getGlobalPosition();
+        System.out.println("Getting Global Rotation1");
         double r = child.getGlobalRotation();
+        System.out.println("Getting Global Scale1");
         double s = child.getGlobalScale();
-        
+
+        System.out.println("MyPosition");
+        System.out.println(child.getPosition()[0] + ", " + child.getPosition()[1]);
+        System.out.println("MyRotation");
+        System.out.println(child.getRotation());
+        System.out.println("MyScale");
+        System.out.println(child.getScale());
+        System.out.println("LocalMatrix");
+        printMatrix(child.getLocalMatrix());
+        System.out.println("GlobalMatrix");
+        printMatrix(child.getGlobalMatrix());
+
         assertEquals(-2, p[0], EPSILON);
         assertEquals(3, p[1], EPSILON);
         assertEquals(90, r, EPSILON);
@@ -71,8 +88,11 @@ public class GameObjectTest extends TestCase {
         child.rotate(-90);
         child.scale(0.5);
 
+        System.out.println("Getting Global Position2");
         p = child.getGlobalPosition();
+        System.out.println("Getting Global Rotation2");
         r = child.getGlobalRotation();
+        System.out.println("Getting Global Scale2");
         s = child.getGlobalScale();
         
         assertEquals(-2, p[0], EPSILON);
@@ -81,9 +101,12 @@ public class GameObjectTest extends TestCase {
         assertEquals(1, s, EPSILON);
 
         // the parent is not affected
-        
+
+        System.out.println("Getting Global Position3");
         p = parent.getGlobalPosition();
+        System.out.println("Getting Global Rotation3");
         r = parent.getGlobalRotation();
+        System.out.println("Getting Global Scale3");
         s = parent.getGlobalScale();
         
         assertEquals(-2, p[0], EPSILON);
@@ -144,5 +167,15 @@ public class GameObjectTest extends TestCase {
         assertEquals(2, s, EPSILON);        
 
     }
-    
+
+
+    public static void printMatrix(double[][] matrix){
+        for(int i = 0; i < 3; i++){
+            System.out.print("{");
+            for(int j = 0; j < 3; j++){
+                System.out.print(" " + matrix[i][j] + " ");
+            }
+            System.out.println("}");
+        }
+    }
 }

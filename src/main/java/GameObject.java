@@ -276,11 +276,12 @@ public class GameObject {
 
     public double[][] getGlobalMatrix(){
         double matrix[][] = MathUtil.identityMatrix(3);
-        GameObject gameObject = this;
 
-        while(gameObject.myParent != null){
+        if(myParent != null){
+            matrix = MathUtil.multiply(matrix, myParent.getGlobalMatrix());
             matrix = MathUtil.multiply(matrix, getLocalMatrix());
-            gameObject = gameObject.getParent();
+        } else {
+            matrix = getLocalMatrix();
         }
 
         return matrix;
@@ -305,12 +306,14 @@ public class GameObject {
      * @return the global rotation of the object (in degrees) 
      */
     public double getGlobalRotation() {
-        GameObject gameObject = this;
-        double angle = 0;
+        double angle;
 
-        while(gameObject.myParent != null){
-            angle = angle + myRotation;
+        if(myParent != null){
+            angle = myParent.getGlobalRotation() + myRotation;
+        } else {
+            angle = myRotation;
         }
+
         return angle;
     }
 
@@ -322,11 +325,12 @@ public class GameObject {
      * @return the global scale of the object 
      */
     public double getGlobalScale() {
-        GameObject gameObject = this;
-        double scale = 1;
+        double scale;
 
-        while(gameObject.myParent != null){
-            scale = scale * myScale;
+        if(myParent != null){
+            scale = myParent.getGlobalScale() * myScale;
+        } else {
+            scale = myScale;
         }
         return scale;
     }
@@ -346,6 +350,8 @@ public class GameObject {
         myParent.myChildren.add(this);
 
         double[][] matrix = getGlobalMatrix();
+        double globalRotation = getGlobalRotation();
+        double globalScale = getGlobalScale();
         double[] myParentGlobalPosition = myParent.getGlobalPosition();
         double myParentGlobalRotation = myParent.getGlobalRotation();
         double myParentGlobalScale = myParent.getGlobalScale();
@@ -354,7 +360,9 @@ public class GameObject {
         matrix = MathUtil.multiply(matrix, MathUtil.reverseRotationMatrix(myParentGlobalRotation));
         matrix = MathUtil.multiply(matrix, MathUtil.reverseTranslationMatrix(myParentGlobalPosition));
 
-
+        setScale(globalScale / myParentGlobalScale);
+        setRotation(globalRotation - myParentGlobalRotation);
+        setPosition(matrix[0][2], matrix[1][2]);
     }
     
 
