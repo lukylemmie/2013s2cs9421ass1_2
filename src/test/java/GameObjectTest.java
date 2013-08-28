@@ -17,11 +17,11 @@ public class GameObjectTest extends TestCase {
     public void testGlobal0() {
         GameObject obj = new GameObject(GameObject.ROOT);
 
-        System.out.println("Getting Global Position");
+//        System.out.println("Getting Global Position");
         double[] p = obj.getGlobalPosition();
-        System.out.println("Getting Global Rotation");
+//        System.out.println("Getting Global Rotation");
         double r = obj.getGlobalRotation();
-        System.out.println("Getting Global Scale");
+//        System.out.println("Getting Global Scale");
         double s = obj.getGlobalScale();
         
         assertEquals(0, p[0], EPSILON);
@@ -59,23 +59,15 @@ public class GameObjectTest extends TestCase {
         
         // the child is also moved:
 
-        System.out.println("Getting Global Position1");
+//        System.out.println("Getting Global Position1");
         double[] p = child.getGlobalPosition();
-        System.out.println("Getting Global Rotation1");
+//        System.out.println("Getting Global Rotation1");
         double r = child.getGlobalRotation();
-        System.out.println("Getting Global Scale1");
+//        System.out.println("Getting Global Scale1");
         double s = child.getGlobalScale();
 
-        System.out.println("MyPosition");
-        System.out.println(child.getPosition()[0] + ", " + child.getPosition()[1]);
-        System.out.println("MyRotation");
-        System.out.println(child.getRotation());
-        System.out.println("MyScale");
-        System.out.println(child.getScale());
-        System.out.println("LocalMatrix");
-        printMatrix(child.getLocalMatrix());
-        System.out.println("GlobalMatrix");
-        printMatrix(child.getGlobalMatrix());
+//        System.out.println("Child");
+//        printData(child);
 
         assertEquals(-2, p[0], EPSILON);
         assertEquals(3, p[1], EPSILON);
@@ -88,11 +80,11 @@ public class GameObjectTest extends TestCase {
         child.rotate(-90);
         child.scale(0.5);
 
-        System.out.println("Getting Global Position2");
+//        System.out.println("Getting Global Position2");
         p = child.getGlobalPosition();
-        System.out.println("Getting Global Rotation2");
+//        System.out.println("Getting Global Rotation2");
         r = child.getGlobalRotation();
-        System.out.println("Getting Global Scale2");
+//        System.out.println("Getting Global Scale2");
         s = child.getGlobalScale();
         
         assertEquals(-2, p[0], EPSILON);
@@ -102,11 +94,11 @@ public class GameObjectTest extends TestCase {
 
         // the parent is not affected
 
-        System.out.println("Getting Global Position3");
+//        System.out.println("Getting Global Position3");
         p = parent.getGlobalPosition();
-        System.out.println("Getting Global Rotation3");
+//        System.out.println("Getting Global Rotation3");
         r = parent.getGlobalRotation();
-        System.out.println("Getting Global Scale3");
+//        System.out.println("Getting Global Scale3");
         s = parent.getGlobalScale();
         
         assertEquals(-2, p[0], EPSILON);
@@ -130,8 +122,17 @@ public class GameObjectTest extends TestCase {
         obj1.translate(1, 1);
         obj1.rotate(90);
         obj1.scale(2);
-        
+
+//        System.out.println("obj1");
+//        printData(obj1);
+//
+//        System.out.println("obj2");
+//        printData(obj2);
+
         obj2.setParent(obj1);
+
+//        System.out.println("obj2");
+//        printData(obj2);
 
         // obj2's global coordinate frame should not be changed
         
@@ -177,5 +178,18 @@ public class GameObjectTest extends TestCase {
             }
             System.out.println("}");
         }
+    }
+
+    public static void printData(GameObject gameObject){
+        System.out.println("MyPosition");
+        System.out.println(gameObject.getPosition()[0] + ", " + gameObject.getPosition()[1]);
+        System.out.println("MyRotation");
+        System.out.println(gameObject.getRotation());
+        System.out.println("MyScale");
+        System.out.println(gameObject.getScale());
+        System.out.println("LocalMatrix");
+        printMatrix(gameObject.getLocalMatrix());
+        System.out.println("GlobalMatrix");
+        printMatrix(gameObject.getGlobalMatrix());
     }
 }

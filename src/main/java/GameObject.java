@@ -344,14 +344,15 @@ public class GameObject {
      * @param parent
      */
     public void setParent(GameObject parent) {
+
+        double[][] matrix = getGlobalMatrix();
+        double globalRotation = getGlobalRotation();
+        double globalScale = getGlobalScale();
         
         myParent.myChildren.remove(this);
         myParent = parent;
         myParent.myChildren.add(this);
 
-        double[][] matrix = getGlobalMatrix();
-        double globalRotation = getGlobalRotation();
-        double globalScale = getGlobalScale();
         double[] myParentGlobalPosition = myParent.getGlobalPosition();
         double myParentGlobalRotation = myParent.getGlobalRotation();
         double myParentGlobalScale = myParent.getGlobalScale();
