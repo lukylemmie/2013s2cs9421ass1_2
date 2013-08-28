@@ -108,7 +108,7 @@ public class MathUtil {
         matrix[0][2] = v[0];
         matrix[1][2] = v[1];
 
-        return null;
+        return matrix;
     }
 
     /**
@@ -120,7 +120,15 @@ public class MathUtil {
     public static double[][] rotationMatrix(double angle) {
         double matrix[][] = identityMatrix(3);
 
-        return null;
+        double cosAngle = Math.cos(Math.toRadians(angle));
+        double sinAngle = Math.sin(Math.toRadians(angle));
+
+        matrix[0][0] = cosAngle;
+        matrix[1][0] = sinAngle;
+        matrix[0][1] = -sinAngle;
+        matrix[1][1] = cosAngle;
+
+        return matrix;
     }
 
     /**
@@ -130,8 +138,12 @@ public class MathUtil {
      * @return
      */
     public static double[][] scaleMatrix(double scale) {
+        double matrix[][] = identityMatrix(3);
 
-        return null;
+        matrix[0][0] = scale;
+        matrix[1][1] = scale;
+
+        return matrix;
     }
 
     
