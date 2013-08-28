@@ -1,10 +1,5 @@
-package ass1.tests;
-
-import org.junit.Test;
-
-import ass1.GameObject;
-
 import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * COMMENT: Comment GameObjectTest 

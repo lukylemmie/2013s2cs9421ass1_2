@@ -1,10 +1,5 @@
-package ass1.tests;
-
 import junit.framework.TestCase;
-
 import org.junit.Test;
-
-import ass1.MathUtil;
 
 /**
  * COMMENT: Comment MathUtilTest 

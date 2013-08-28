@@ -264,6 +264,28 @@ public class GameObject {
         
     }
 
+    public double[][] getLocalMatrix(){
+        double matrix[][] = MathUtil.identityMatrix(3);
+
+        matrix = MathUtil.multiply(matrix, MathUtil.translationMatrix(myTranslation));
+        matrix = MathUtil.multiply(matrix, MathUtil.rotationMatrix(myRotation));
+        matrix = MathUtil.multiply(matrix, MathUtil.scaleMatrix(myScale));
+
+        return matrix;
+    }
+
+    public double[][] getGlobalMatrix(){
+        double matrix[][] = MathUtil.identityMatrix(3);
+        GameObject gameObject = this;
+
+        while(gameObject.myParent != null){
+            matrix = MathUtil.multiply(matrix, getLocalMatrix());
+            gameObject = gameObject.getParent();
+        }
+
+        return matrix;
+    }
+
     /**
      * Compute the object's position in world coordinates
      * 
@@ -273,6 +295,11 @@ public class GameObject {
      */
     public double[] getGlobalPosition() {
         double[] p = new double[2];
+        double[][] matrix = getGlobalMatrix();
+
+        p[0] = matrix[0][2];
+        p[1] = matrix[1][2];
+
         return p; 
     }
 
@@ -284,7 +311,9 @@ public class GameObject {
      * @return the global rotation of the object (in degrees) 
      */
     public double getGlobalRotation() {
-        return 0;
+        double[][] matrix = getGlobalMatrix();
+
+        return Math.toDegrees(Math.asin(matrix[1][0]));
     }
 
     /**
@@ -295,7 +324,10 @@ public class GameObject {
      * @return the global scale of the object 
      */
     public double getGlobalScale() {
-        return 1.0;
+        double[][] matrix = getGlobalMatrix();
+        double angle = getGlobalRotation();
+
+        return matrix[0][0]/Math.cos(Math.toRadians(angle));
     }
 
     /**
@@ -311,6 +343,8 @@ public class GameObject {
         myParent.myChildren.remove(this);
         myParent = parent;
         myParent.myChildren.add(this);
+
+        getGlobalMatrix();
         
     }
     
