@@ -294,13 +294,7 @@ public class GameObject {
      * @return a point in world coordinats in [x,y] form
      */
     public double[] getGlobalPosition() {
-        double[] p = new double[2];
-        double[][] matrix = getGlobalMatrix();
-
-        p[0] = matrix[0][2];
-        p[1] = matrix[1][2];
-
-        return p; 
+        return MathUtil.positionFromMatrix(getGlobalMatrix());
     }
 
     /**
@@ -311,9 +305,13 @@ public class GameObject {
      * @return the global rotation of the object (in degrees) 
      */
     public double getGlobalRotation() {
-        double[][] matrix = getGlobalMatrix();
+        GameObject gameObject = this;
+        double angle = 0;
 
-        return Math.toDegrees(Math.asin(matrix[1][0]));
+        while(gameObject.myParent != null){
+            angle = angle + myRotation;
+        }
+        return angle;
     }
 
     /**
@@ -324,10 +322,13 @@ public class GameObject {
      * @return the global scale of the object 
      */
     public double getGlobalScale() {
-        double[][] matrix = getGlobalMatrix();
-        double angle = getGlobalRotation();
+        GameObject gameObject = this;
+        double scale = 1;
 
-        return matrix[0][0]/Math.cos(Math.toRadians(angle));
+        while(gameObject.myParent != null){
+            scale = scale * myScale;
+        }
+        return scale;
     }
 
     /**
@@ -344,8 +345,16 @@ public class GameObject {
         myParent = parent;
         myParent.myChildren.add(this);
 
-        getGlobalMatrix();
-        
+        double[][] matrix = getGlobalMatrix();
+        double[] myParentGlobalPosition = myParent.getGlobalPosition();
+        double myParentGlobalRotation = myParent.getGlobalRotation();
+        double myParentGlobalScale = myParent.getGlobalScale();
+
+        matrix = MathUtil.multiply(matrix, MathUtil.reverseScaleMatrix(myParentGlobalScale));
+        matrix = MathUtil.multiply(matrix, MathUtil.reverseRotationMatrix(myParentGlobalRotation));
+        matrix = MathUtil.multiply(matrix, MathUtil.reverseTranslationMatrix(myParentGlobalPosition));
+
+
     }
     
 

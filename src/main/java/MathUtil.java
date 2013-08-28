@@ -111,6 +111,22 @@ public class MathUtil {
         return matrix;
     }
 
+    public static double[][] reverseTranslationMatrix(double[] v){
+        v[0] = -v[0];
+        v[1] = -v[1];
+
+        return translationMatrix(v);
+    }
+
+    public static double[] positionFromMatrix(double[][] matrix){
+        double p[] = new double[2];
+
+        p[0] = matrix[0][2];
+        p[1] = matrix[1][2];
+
+        return p;
+    }
+
     /**
      * TODO: A 2D rotation matrix for the given angle
      * 
@@ -131,6 +147,10 @@ public class MathUtil {
         return matrix;
     }
 
+    public static double[][] reverseRotationMatrix(double angle){
+        return rotationMatrix(-angle);
+    }
+
     /**
      * TODO: A 2D scale matrix that scales both axes by the same factor
      * 
@@ -146,5 +166,7 @@ public class MathUtil {
         return matrix;
     }
 
-    
+    public static double[][] reverseScaleMatrix(double scale){
+        return scaleMatrix(1/scale);
+    }
 }
