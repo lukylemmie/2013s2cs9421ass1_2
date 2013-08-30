@@ -345,6 +345,8 @@ public class GameObject {
      */
     public void setParent(GameObject parent) {
 
+        //TODO: check for x/DIV! errors
+
         double[][] matrix = getGlobalMatrix();
         double globalRotation = getGlobalRotation();
         double globalScale = getGlobalScale();
