@@ -1,3 +1,4 @@
+import ass1.GameObject;
 import junit.framework.TestCase;
 import org.junit.Test;
 

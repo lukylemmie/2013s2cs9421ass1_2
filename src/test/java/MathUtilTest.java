@@ -1,3 +1,4 @@
+import ass1.MathUtil;
 import junit.framework.TestCase;
 import org.junit.Test;
 

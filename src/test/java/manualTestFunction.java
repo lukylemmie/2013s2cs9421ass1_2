@@ -1,3 +1,5 @@
+import ass1.MathUtil;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Andrew2012

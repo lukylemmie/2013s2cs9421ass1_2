@@ -5,7 +5,7 @@ import ass1.Mouse;
 import ass1.PolygonalGameObject;
 
 /**
- * A simple cursor class for testing the Mouse class 
+ * A simple cursor class for testing the ass1.Mouse class
  *
  * @author malcolmr
  */
