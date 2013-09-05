@@ -363,7 +363,11 @@ public class GameObject {
         matrix = MathUtil.multiply(matrix, MathUtil.reverseRotationMatrix(myParentGlobalRotation));
         matrix = MathUtil.multiply(matrix, MathUtil.reverseTranslationMatrix(myParentGlobalPosition));
 
-        setScale(globalScale / myParentGlobalScale);
+        if(myParentGlobalScale != 0){
+            setScale(globalScale / myParentGlobalScale);
+        } else {
+            setScale(0);
+        }
         setRotation(globalRotation - myParentGlobalRotation);
         setPosition(matrix[0][2], matrix[1][2]);
     }
