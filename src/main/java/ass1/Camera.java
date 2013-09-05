@@ -1,5 +1,6 @@
 package ass1;
 
+import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 
 /**
@@ -40,8 +41,13 @@ public class Camera extends GameObject {
     public void setView(GL2 gl) {
         
         // TODO 1. clear the view to the background colour
+
+        gl.glClearColor(0,0,0,1);
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT);
         
-        // TODO 2. set the view matrix to account for the camera's position         
+        // TODO 2. set the view matrix to account for the camera's position
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
+        gl.glLoadIdentity();
     }
 
     public void reshape(GL2 gl, int x, int y, int width, int height) {

@@ -29,8 +29,12 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: org.jogamp.jogl:jogl.all:2.0-b526-20111018" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.gluegen:gluegen-rt:2.0-b424-20111018" level="project" />
+    <orderEntry type="library" name="gluegen-rt-natives-windows-amd64" level="project" />
+    <orderEntry type="library" name="gluegen-rt-natives-windows-i586" level="project" />
+    <orderEntry type="library" name="gluegen-rt" level="project" />
+    <orderEntry type="library" name="jogl-all-natives-windows-amd64" level="project" />
+    <orderEntry type="library" name="jogl-all-natives-windows-i586" level="project" />
+    <orderEntry type="library" name="jogl-all" level="project" />
   </component>
 </module>
 
