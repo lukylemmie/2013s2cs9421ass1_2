@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -64,7 +65,7 @@ public class Map {
         myMerchants.add(merchant);
     }
     
-    static public Map read(InputStream in) {
+    static public Map read(InputStream in) throws JSONException {
         
         JSONTokener jtk = new JSONTokener(in);
         JSONObject jsonMap = new JSONObject(jtk);

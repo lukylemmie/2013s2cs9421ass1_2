@@ -1,16 +1,13 @@
 package sailing.objects;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import org.json.JSONObject;
-
 import ass1.GameObject;
 import ass1.MathUtil;
 import ass1.Mouse;
 import ass1.PolygonalGameObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import static ass1.MathUtil.TAU;
+import java.awt.event.MouseEvent;
 
 /**
  * COMMENT: Comment Boat 
@@ -119,7 +116,7 @@ public class Pirate extends PolygonalGameObject {
      * @param jsonPlayer
      * @return
      */
-    public static Pirate fromJSON(JSONObject json) {
+    public static Pirate fromJSON(JSONObject json) throws JSONException {
         double x = json.getDouble("x");
         double y = json.getDouble("y");
         double angle = json.getDouble("angle");

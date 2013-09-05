@@ -28,5 +28,6 @@
             <name>ISCPIF repository</name>
             <url>http://maven.iscpif.fr/public/</url>
         </repository>
+
     </repositories>
 </project>
