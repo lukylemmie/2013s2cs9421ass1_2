@@ -260,10 +260,12 @@ public class GameObject {
         }
 
         // TODO: draw the object and all its children recursively
-        // setting the model transform appropriately 
-    
+        // setting the model transform appropriately
+        gl.glTranslated(myTranslation[0], myTranslation[1], 0);
+        gl.glRotated(myRotation, 0, 0, 1);
+        gl.glScaled(myScale, myScale, 1);
         // Call drawSelf() to draw the object itself
-        
+        drawSelf(gl);
     }
 
     public double[][] getLocalMatrix(){
